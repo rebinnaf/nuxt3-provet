@@ -1,6 +1,9 @@
-# Nuxt Minimal Starter
+# Nuxt3 Provet Signup
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+A small app to keep your delicious nuxt3-provet
+
+## [demo](https://rebinnaf.github.io/nuxt3-provet/)
+![nuxt3-provet-app](public/readme.png?raw=true "nuxt3-provet-app")
 
 ## Setup
 
