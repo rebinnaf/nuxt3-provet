@@ -66,6 +66,8 @@ async function signup() {
 <template>
   <main class="n-stack-horizontal h-100">
     <provet-stack class="signup-stack n-margin-auto" direction="vertical" align-items="center" justify-content="center">
+      <img class="provet-cloud-logo" alt="Provet Cloud logo" width="40%" src="https://static-s3-eu.provetcloud.com/static/kuvat/provet_cloud_new_logo_570x80.png">
+
       <provet-card padding="l">
         <provet-stack gap="l">
           <p>Enter your email and password to signup.</p>
