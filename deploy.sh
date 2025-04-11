@@ -18,7 +18,7 @@ git add -A
 git commit -m 'deploy'
 
 # force push to your GitHub repo's gh-pages branch
-git push -f git@github.com:rebinnaf/nuxt3-provet.git master:gh-pages
+git push -f git@github.com:rebinnaf/nuxt3-provet.git main:gh-pages
 
 # return to root
 cd -
