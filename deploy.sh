@@ -9,8 +9,8 @@ pnpm run generate
 # move into the output directory
 cd .output/public
 
-# optional: set custom domain
-# echo 'www.example.com' > CNAME
+# rename the directory to be served from the root
+mv * ../
 
 # initialize git and push to gh-pages branch
 git init
