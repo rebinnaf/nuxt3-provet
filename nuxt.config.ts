@@ -5,7 +5,6 @@ export default defineNuxtConfig({
   typescript: {
     typeCheck: true,
   },
-
   app: {
     baseURL: '/nuxt3-provet/',
     head: {
@@ -22,12 +21,10 @@ export default defineNuxtConfig({
       ],
     },
   },
-
   vue: {
     compilerOptions: {
       isCustomElement: tag => tag.includes('-'),
     },
   },
-
   modules: ['nuxt-auth-utils'],
 })
