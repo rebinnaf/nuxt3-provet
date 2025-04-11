@@ -9,3 +9,4 @@ interface SignupForm {
 }
 
 export type{ Errors, SignupForm }
+

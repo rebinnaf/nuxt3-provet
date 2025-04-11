@@ -9,15 +9,18 @@ const bodySchema = z.object({
 export default defineEventHandler(async (event) => {
   const { email } = await readValidatedBody(event, bodySchema.parse)
 
-  await setUserSession(event, {
-    user: {
-      username: email,
-    },
-  })
-  return {}
-
-  throw createError({
-    statusCode: 401,
-    message: 'Bad credentials',
-  })
+  try{
+    await setUserSession(event, {
+      user: {
+        username: email,
+      },
+    })
+    return {}
+  }
+  catch{
+    throw createError({
+      statusCode: 401,
+      message: 'Bad credentials',
+    })
+  }
 })
