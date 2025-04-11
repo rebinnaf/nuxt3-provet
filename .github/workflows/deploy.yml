@@ -1,10 +1,9 @@
 name: Deploy to GitHub Pages
 
-# Trigger deployment on push to the 'main' branch
 on:
   push:
     branches:
-      - main  # Adjust if you use a different default branch like 'master'
+      - main  # Adjust this if you're using a different default branch
 
 jobs:
   deploy:
@@ -15,25 +14,31 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      # Step 2: Set up Node.js environment
+      # Step 2: Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '20'  # Use the Node.js version required by your app
+          node-version: '16'  # Adjust according to your Nuxt app's Node.js version
 
       # Step 3: Install dependencies
       - name: Install dependencies
         run: npm install
 
-      # Step 4: Build and Generate the Nuxt app
+      # Step 4: Build and Generate Nuxt app
       - name: Build and Generate Nuxt app
         run: |
-          npm run build   # Build the app
-          npm run generate  # Generate the static files
+          npm run build
+          npm run generate
 
-      # Step 5: Deploy to GitHub Pages
+      # Step 5: Set up Git identity (to avoid "unknown author" error)
+      - name: Set up Git identity
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      # Step 6: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         run: |
-          npx gh-pages -d dist  # Push the generated static files to the gh-pages branch
+          npx gh-pages -d dist  # Deploy the static site using gh-pages
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Automatically provides the required GitHub token
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Automatically provided GitHub token
