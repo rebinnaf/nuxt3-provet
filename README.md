@@ -3,7 +3,7 @@
 A small app to keep your delicious nuxt3-provet
 
 ## [demo](https://rebinnaf.github.io/nuxt3-provet/)
-![nuxt3-provet-app](public/readme.png?raw=true "nuxt3-provet-app")
+![nuxt3-provet-app](readme.png?raw=true "nuxt3-provet-app")
 
 ## Setup
 
