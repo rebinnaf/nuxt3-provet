@@ -4,6 +4,7 @@
 set -e
 
 # generate static site
+pnpm install
 pnpm run generate
 
 # move into the output directory

@@ -8,7 +8,8 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "lint": "eslint --fix ."
+    "lint": "eslint --fix .",
+    "deploy": "sh deploy.sh"
   },
   "dependencies": {
     "@provetcloud/css": "^1.1.0",
