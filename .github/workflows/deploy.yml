@@ -1,44 +1,41 @@
+# https://github.com/actions/deploy-pages#usage
 name: Deploy to GitHub Pages
-
 on:
+  workflow_dispatch:
   push:
     branches:
-      - main  # Adjust this if you're using a different default branch
-
+      - main
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-
     steps:
-      # Step 1: Checkout the repository
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      # Step 2: Set up Node.js
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@v4
+      - run: corepack enable
+      - uses: actions/setup-node@v4
         with:
-          node-version: '20'  # Adjust according to your Nuxt app's Node.js version
-
-      # Step 3: Install dependencies
-      - name: Install dependencies
-        run: npm install
-
-      # Step 4: Build and Generate Nuxt app
-      - name: Build and Generate Nuxt app
-        run: |
-          npm run build
-          npm run generate
-
-      # Step 5: Set up Git identity (to avoid "unknown author" error)
-      - name: Set up Git identity
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-
-      # Step 6: Deploy to GitHub Pages
+          node-version: "20"
+      # Pick your own package manager and build script
+      - run: npm install
+      - run: npx nuxt build --preset github_pages
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./.output/public
+  # Deployment job
+  deploy:
+    # Add a dependency to the build job
+    needs: build
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+    # Deploy to the github_pages environment
+    environment:
+      name: github_pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    # Specify runner + deployment step
+    runs-on: ubuntu-latest
+    steps:
       - name: Deploy to GitHub Pages
-        run: |
-          npx gh-pages -d dist  # Deploy the static site using gh-pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Automatically provided GitHub token
+        id: deployment
+        uses: actions/deploy-pages@v4
